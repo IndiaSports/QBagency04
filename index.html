@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QB Agency | Premium Gaming Advertising</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black-900: #080808;
+            --black-800: #1a1a1a;
+            --black-700: #252525;
+            --purple-primary: hsla(260, 97%, 61%, 0.85);
+            --purple-glow: hsla(260, 97%, 50%, 0.75);
+            --text-light: #f5f5f5;
+            --text-gray: #b0b0b0;
+            --border-radius: 12px;
+            --transition: 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--black-900);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+            background-color: rgba(8, 8, 8, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            color: var(--purple-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 60px;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://i.pinimg.com/736x/32/b1/25/32b125d064b77e0d2ddfb161e02801a2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .background-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(8, 8, 8, 0.92) 0%, rgba(26, 26, 26, 0.85) 100%);
+        }
+
+        .hero-content {
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ffffff 0%, var(--purple-primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2.5vw, 18px);
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 300px;
+            margin: 0 auto 30px;
+        }
+
+        /* Button Styles */
+        .button {
+            --black-700: hsla(0 0% 12% / 1);
+            --border_radius: 9999px;
+            --transtion: 0.3s ease-in-out;
+            --offset: 2px;
+
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transform-origin: center;
+            padding: 0.9rem 1.8rem;
+            background-color: transparent;
+            border: none;
+            border-radius: var(--border_radius);
+            transform: scale(calc(1 + (var(--active, 0) * 0.1)));
+            transition: transform var(--transtion);
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .button::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background-color: var(--black-700);
+            border-radius: var(--border_radius);
+            box-shadow: inset 0 0.5px hsl(0, 0%, 100%), inset 0 -1px 2px 0 hsl(0, 0%, 0%),
+                0px 4px 10px -4px hsla(0 0% 0% / calc(1 - var(--active, 0))),
+                0 0 0 calc(var(--active, 0) * 0.375rem) hsl(260 97% 50% / 0.75);
+            transition: all var(--transtion);
+            z-index: 0;
+        }
+
+        .button::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background-color: hsla(260 97% 61% / 0.85);
+            background-image: radial-gradient(
+                    at 51% 89%,
+                    hsla(266, 45%, 74%, 1) 0px,
+                    transparent 50%
+                ),
+                radial-gradient(at 100% 100%, hsla(266, 36%, 60%, 1) 0px,
+                    transparent 50%),
+                radial-gradient(at 22% 91%, hsla(266, 36%, 60%, 1) 0px,
+                    transparent 50%);
+            background-position: top;
+            opacity: var(--active, 0);
+            border-radius: var(--border_radius);
+            transition: opacity var(--transtion);
+            z-index: 2;
+        }
+
+        .button:is(:hover, :focus-visible) {
+            --active: 1;
+        }
+
+        .button:active {
+            transform: scale(1);
+        }
+
+        .button .dots_border {
+            --size_border: calc(100% + 2px);
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: var(--size_border);
+            height: var(--size_border);
+            background-color: transparent;
+            border-radius: var(--border_radius);
+            z-index: -10;
+        }
+
+        .button .dots_border::before {
+            content: "";
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transform-origin: left;
+            transform: rotate(0deg);
+            width: 100%;
+            height: 1.5rem;
+            background-color: white;
+            mask: linear-gradient(transparent 0%, white 120%);
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .button .video-emoji {
+            position: relative;
+            z-index: 10;
+            width: 2rem;
+            height: 2rem;
+            flex-shrink: 0;
+            border-radius: 6px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .button .video-emoji video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button .text_button {
+            position: relative;
+            z-index: 10;
+            background-image: linear-gradient(
+                90deg,
+                hsla(0 0% 100% / 1) 0%,
+                hsla(0 0% 100% / var(--active, 0)) 120%
+            );
+            background-clip: text;
+            font-size: 1rem;
+            color: transparent;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black-800);
+            padding: 40px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .footer-logo span {
+            color: var(--purple-primary);
+        }
+
+        .footer-about p {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer-contact {
+            text-align: center;
+        }
+
+        .footer-contact h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .footer-contact p {
+            color: var(--text-gray);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-gray);
+            font-size: 12px;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 40px 0;
+            background-color: var(--black-800);
+            text-align: center;
+        }
+
+        .cta h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 3.5vw, 28px);
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive Styles */
+        @media (min-width: 640px) {
+            .buttons-container {
+                flex-direction: row;
+                justify-content: center;
+                max-width: 100%;
+                gap: 20px;
+            }
+            
+            .button {
+                width: auto;
+                min-width: 200px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: clamp(40px, 5vw, 52px);
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-content {
+                text-align: left;
+                margin-left: 0;
+            }
+            
+            .buttons-container {
+                justify-content: flex-start;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">QB <span>Agency</span></div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="background-image"></div>
+        
+        <div class="container hero-content">
+            <div>
+                <h1>Elite Gaming Advertising</h1>
+                <p>QB Agency specializes in high-performance marketing for gaming, sports, and competitive entertainment. We run targeted campaigns for cricket, football, colour prediction, tennis and all gaming verticals.</p>
+                
+                <div class="buttons-container">
+                    <a href="https://t.me/+y9odvJif3No3MjE1" target="_blank" class="button">
+                        <div class="dots_border"></div>
+                        <div class="video-emoji">
+                            <video autoplay muted loop playsinline>
+                                <source src="https://d1yei2z3i6k35z.cloudfront.net/12037013/68894e0775ab5_Untitledvideo-MadewithClipchamp5.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <span class="text_button">Join Telegram</span>
+                    </a>
+                    
+                    <a href="https://t.me/quicklygrow" target="_blank" class="button">
+                        <div class="dots_border"></div>
+                        <div class="video-emoji">
+                            <video autoplay muted loop playsinline>
+                                <source src="https://d1yei2z3i6k35z.cloudfront.net/12037013/68894e0775ab5_Untitledvideo-MadewithClipchamp5.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <span class="text_button">Chat Directly</span>
+                    </a>
+                </div>
+                
+                <p style="font-size: 14px; opacity: 0.8;">Connect with us for elite gaming advertising solutions</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h3>Premium Advertising Solutions</h3>
+            <p>Get expert campaigns for all gaming verticals including cricket, football, tennis, colour prediction and more.</p>
+            
+            <div class="buttons-container">
+                <a href="https://t.me/+y9odvJif3No3MjE1" target="_blank" class="button">
+                    <div class="dots_border"></div>
+                    <div class="video-emoji">
+                        <video autoplay muted loop playsinline>
+                            <source src="https://d1yei2z3i6k35z.cloudfront.net/12037013/68894e0775ab5_Untitledvideo-MadewithClipchamp5.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <span class="text_button">Join Channel</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">QB <span>Agency</span></div>
+                    <p>Premium marketing agency specializing in gaming, sports, and competitive entertainment advertising.</p>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Services</h4>
+                    <p><i class="fas fa-futbol"></i> Sports Advertising</p>
+                    <p><i class="fas fa-gamepad"></i> Gaming Campaigns</p>
+                    <p><i class="fas fa-chart-line"></i> Performance Marketing</p>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fab fa-telegram"></i> @quicklygrow</p>
+                    <p><i class="fas fa-paper-plane"></i> Telegram Channel</p>
+                    <p><i class="fas fa-globe"></i> Gaming Specialists</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 - 2025 QB Agency. All rights reserved. | Premium Gaming Advertising</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Button interaction enhancement
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.setProperty('--active', '1');
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.setProperty('--active', '0');
+            });
+            
+            button.addEventListener('touchstart', function() {
+                this.style.setProperty('--active', '1');
+            });
+            
+            button.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.setProperty('--active', '0');
+                }, 300);
+            });
+        });
+
+        // Optimize background for mobile
+        function optimizeBackground() {
+            const background = document.querySelector('.background-image');
+            if (window.innerWidth < 768) {
+                background.style.backgroundAttachment = 'scroll';
+                background.style.backgroundPosition = 'center top';
+            } else {
+                background.style.backgroundAttachment = 'fixed';
+                background.style.backgroundPosition = 'center';
+            }
+        }
+
+        // Initialize and run on resize
+        optimizeBackground();
+        window.addEventListener('resize', optimizeBackground);
+        
+        // Preload background image for better performance
+        const bgImage = new Image();
+        bgImage.src = 'https://i.pinimg.com/736x/32/b1/25/32b125d064b77e0d2ddfb161e02801a2.jpg';
+        
+        // Preload video for buttons
+        const videoSrc = 'https://d1yei2z3i6k35z.cloudfront.net/12037013/68894e0775ab5_Untitledvideo-MadewithClipchamp5.mp4';
+        const videoPreload = document.createElement('video');
+        videoPreload.src = videoSrc;
+        videoPreload.preload = 'auto';
+    </script>
+</body>
+</html>
